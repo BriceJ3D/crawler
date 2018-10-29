@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <h1>Resultats pour le tag "{{tag.name}}"</h1>
+    </div>
+    <div class="row">
+        <h3>Domaines expirés : </h3>
+    </div>
+    <div class="form_group">
+        <!-- indentation bizare a cause du textarea -->
+        <textarea id="textareaToCopy" class="form-control textareaToCopy">
+{% for research in tag.researches %}{% for url in research.urls %}{% for domain in url.domains %}{% if domain.dispo == 'Disponible'%}{{domain.domainName}}
+{% endif %}{% endfor %}{% endfor %}{% endfor %}
+        </textarea>
+        <button id="clipboard"><i class="fas fa-copy"></i></button>
+    </div>
+    <div>
+         <table class="table dataTable">
+            <thead>
+                <tr>
+                    <th class="name">Nom de domaine</th>
+                    <th class="trustflow">TF</th>
+                    <th class="trustmetrics">TM</th>
+                    <th class="refip">RefIP</th>
+                    <th class="title">Title</th>
+                    <th class="language">Language</th>
+                    <th class="ttf">TTF</th>
+                    <th class="tags">Tags</th>
+                    <th class="liens">Liens</th>
+                    <th class="achat">Achat</th>
+                    <th class="date">Date crawl</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for research in tag.researches %}
+                {% for url in research.urls %}
+                    {% for domain in url.domains %}
+                        {% if domain.dispo == 'Disponible'%}
+                            {% include 'list_available_domains.html.twig' %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

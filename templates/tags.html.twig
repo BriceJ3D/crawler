@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="recherche">
+        <h1>Tags</h1>
+        <table class="table">
+            <tr>
+                <th>
+                    Tag
+                </th>
+            </tr>
+            {% for tag in tags %}
+            <tr>
+                <td>
+                    <a href="{{ path('tag_show', {'id': tag.id}) }}">{{tag.name}} </a> 
+                </td>
+            <tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+      

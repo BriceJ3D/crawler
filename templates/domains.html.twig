@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <h1>Domaines</h1>
+    </div>
+    <div class="row">
+        <h3>Domaines disponibles : </h3>
+    </div>
+    <div class="form-group">
+        <!-- indentation bizare a cause du textarea -->
+        <textarea id="textareaToCopy" class="form-control textareaToCopy">
+{% for domain in domains %}{% if domain.dispo == 'Disponible'%}{{domain.domainName}}
+{% endif %}{% endfor %}
+        </textarea>
+        <button class="btn btn-sm btn-primary" id="clipboard"><i class="fas fa-copy"></i></button>
+    </div>
+    <div>
+        {{ form_start(form) }}
+        <div class="row">
+            <div  class="col">
+                <div class="row">
+                    <div class="col text-right">
+                    {{ form_label(form.TF) }}
+                    </div>  
+                    <div class="col">
+                    {{ form_widget(form.TF) }}
+                    {{ form_help(form.TF) }}
+                    </div>
+                </div>
+            </div>
+            <div  class="col">
+                <div class="row">
+                    <div class="col text-right">
+                    {{ form_label(form.TM) }}
+                    </div>  
+                    <div class="col">
+                    {{ form_widget(form.TM) }}
+                    {{ form_help(form.TM) }}
+                    </div>
+                </div>
+            </div>
+            <div  class="col">
+                <div class="row">
+                    <div class="col text-right">
+                    {{ form_label(form.RefIp) }}
+                    </div>  
+                    <div class="col">
+                    {{ form_widget(form.RefIp) }}
+                    {{ form_help(form.RefIp) }}
+                    </div>
+                </div>
+            </div>
+            <div  class="col">
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <table class="table dataTable">
+            <thead>
+                <tr>
+                    <th class="name">Nom de domaine</th>
+                    <th class="trustflow">TF</th>
+                    <th class="trustmetrics">TM</th>
+                    <th class="refip">RefIP</th>
+                    <th class="title">Title</th>
+                    <th class="language">Language</th>
+                    <th class="ttf">TTF</th>
+                    <th class="tags">Tags</th>
+                    <th class="liens">Liens</th>
+                    <th class="achat">Achat</th>
+                    <th class="date">Date crawl</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for domain in domains %}
+                    {% if domain.dispo == 'Disponible'%}
+                        {% include 'list_available_domains.html.twig' %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+       </table>
+    </div>
+{% endblock %}

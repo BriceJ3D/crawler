@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="main_recherche">
+    	<div class="main_tags">
+    		<h1>Tags</h1>
+	       	{{ form_start(form_tags) }}
+	       	<div class="row">
+	            <div class="col">
+	            {{ form_widget(form_tags.keywords) }}
+	            
+	            </div>  
+	        </div>
+	        <div class="row">
+	            <div class="col-lg-3 col-xs-4">
+	            {{ form_widget(form_tags.city) }}
+	            </div> 
+	            <div class="col-lg-3 col-xs-4">
+	            {{ form_widget(form_tags.getUrl) }}
+	            </div>   
+	        </div>
+	       	
+			{{ form_end(form_tags) }}
+			{% if recupOK is same as (true) %}
+				<div class="alert alert-success" role="alert">
+					Récuperation des domaines effectuée avec succès
+				</div>
+			{% elseif recupOK  is same as (false) %}
+				<div class="alert alert-danger" role="alert">
+					Problème lors de la récuperation des domaines
+				</div>
+			{% endif %}
+		</div>
+		<div class="main_urls">
+			<h1>Recherche</h1>
+		    {{ form_start(form_crawl) }}
+			{{ form_widget(form_crawl) }}
+			{{ form_end(form_crawl) }}
+		</div>
+	</div>
+	{% for city in cities %}
+		<input type="hidden" value="{{city.name}}" class="city">
+	{% endfor %}
+{% endblock %}
+      

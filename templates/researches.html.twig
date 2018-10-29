@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="recherche">
+        <h1>Recherches</h1>
+        <table class="table">
+            <tr>
+                <th>
+                    Recherche
+                </th>
+                <th>
+                    Avancement
+                </th>
+                <th>
+                   Url crawlés
+                </th>
+                <th>
+                   Domaines trouvés
+                </th>
+                <th>
+                </th>
+            </tr>
+            {% for search in researches %}
+            <tr>
+                <td>
+                    <a href="{{ path('search_show', {'id': search.id}) }}">{{search.searchDate|date("d/m/Y H:i") }}</a> 
+                    {% for tag in search.tags %}
+                        {{tag.name}} 
+                    {% endfor %}
+                </td>
+                <td>{{search.getUrlsLeft()|length}}/{{search.getUrls()|length}}
+                    {% if search.getUrls()|length >0 %}
+                        ({{(search.getUrlsLeft()|length / search.getUrls()|length *100)|round(1, 'floor')}}%)
+                    {% endif %}
+                <td>
+                    {{search.crawledUrls}}
+                </td>
+                <td>
+                    {{search.availableDomains}}
+                </td>
+                <td id="search_td_{{search.id}}">
+                    {% if search.getUrls()|length != search.getUrlsLeft()|length %}
+                        <a class="btn btn-primary btn-sm search_launch" id="launch_crawl_{{search.id}}" onclick="launchCrawl({{search.id}},'{{ path('researchcrawl', {'id': search.id}) }}')">Lancer</a>
+                    {% endif %}
+                </td>
+            <tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+function launchCrawl(id, Path) {
+    $('#launch_crawl_'+id).remove();
+    $('#search_td_'+id).html('<i class="fas fa-spinner fa-pulse fa-2x"></i>');
+    $.ajax({
+        type: "POST",
+        url: Path,
+        async: true,
+        data: { },
+        success: function () {
+            $('#search_td_'+id).html('Terminé');
+        }
+    });
+}</script>
+{% endblock %}

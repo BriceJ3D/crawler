@@ -1,0 +1,56 @@
+<tr>
+    <td class="p-1">
+        <div class="input-group">
+            <span class="d-none">{{domain.domainName}}</span>
+            <input type="text" class="domainToCopy" value="{{domain.domainName}}"/>
+            <button class="btn btn-sm btn-secondary buttonToCopy" data-clipboard-target="#foo">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </td>
+    <td class="p-1">{{domain.trustFlow}}</td>
+    <td class="p-1">{{domain.trustMetrics}}</td>
+    <td class="p-1">{{domain.RefIP}}</td>
+    <td class="p-1">{{domain.Title}}</td>
+    <td class="p-1">{{domain.Language}}</td>
+    <td class="p-1"> 
+        {% for ttf in domain.getTopicalTrustFlows %}
+            {% set topics = ttf.topic|split('/')%}
+            <span class="badge badge-{{topics[0]}}">{{ttf.value}} {{ttf.topic}}</span>
+        {% endfor %}
+    </td>
+    <td class="p-1">
+        {% for tag in domain.getTags %}
+            <span class="badge badge-secondary">{{tag}} </span>
+        {% endfor %}
+    </td>
+    <td class="p-1"> <!-- liens infos-->
+        <button type="button" class="btn btn-sm btn-dropdown dropdown-toggle" data-toggle="dropdown">
+            Choisir
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="https://app.seobserver.com/sites/view/{{domain.domainName}}" target="blank">SEO</a>
+            <a class="dropdown-item" href="https://web.archive.org/web/*/{{domain.domainName}}" target="blank">WebA</a>
+            <a class="dropdown-item" href="http://www.screenshots.com/search/?q={{domain.domainName}}" target="blank">SS</a>
+        </div>
+    </td>
+    <td class="p-1"> <!-- liens achat-->
+            <button type="button" class="btn btn-sm btn-dropdown dropdown-toggle" data-toggle="dropdown">
+                Choisir
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-header">Lien direct</div>
+                <a class="dropdown-item"  href="https://www.namebright.com/{{domain.domainName}}" target="blank">NameBright</a>
+                <a class="dropdown-item"  href="https://shop.gandi.net/fr/domain/suggest?search={{domain.domainName}}" target="blank">Gandi</a>
+                <a class="dropdown-item"  href="https://cp.espace2001.com/cart.php?a=add&domain=register&query={{domain.domainName}}" target="blank">E2001</a>
+                <a class="dropdown-item"  href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain.domainName}}" target="blank">NameCheap</a>
+                <a class="dropdown-item"  href="https://fr.godaddy.com/domains/searchresults.aspx?isc=gofhfhfr08&checkAvail=1&tmskey=ad_dlp_com_fr&domainToCheck={{domain.domainName}}" target="blank">GoDaddy</a>
+                <a class="dropdown-item"  href="https://www.ovh.com/fr/order/domain/#/legacy/domain/search?domain={{domain.domainName}}" target="blank">OVH</a>
+                <div class="dropdown-header">Lien global</div>
+                <a class="dropdown-item"  href="https://internetbs.net/fr/enregistrement-domaines/index.html" target="blank">Internet.bs</a>
+                <a class="dropdown-item"  href="https://www.dynadot.com/fr/" target="blank">Dynadot</a>
+            </div>
+        
+    </td>
+    <td class="p-1">{{domain.creationDate|date('d/m/Y H:i:s')}}</td>
+</tr>

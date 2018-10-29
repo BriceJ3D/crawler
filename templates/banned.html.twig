@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+
+{% block body %}
+	     {{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+		<div>
+		 	<table class="table">
+	            <thead>
+	                <tr>
+	                    <th>
+	                        Nom de domaine
+	                    </th>
+	                </tr>
+	            </thead>
+	            <tbody>
+					{% for url in banned %}
+						<tr><td>{{url.name}}</td></tr>
+					{% endfor %}
+				</tbody>
+{% endblock %}

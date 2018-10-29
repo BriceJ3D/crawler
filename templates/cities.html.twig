@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+
+{% block body %}
+    {{ form_start(form) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+	<div>
+	 	<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ville
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+				{% for city in cities %}
+					<tr><td>{{city.name}}</td></tr>
+				{% endfor %}
+			</tbody>
+{% endblock %}

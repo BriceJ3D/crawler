@@ -1,0 +1,120 @@
+
+@import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+$topics: ( 
+	"Arts" : #E50,
+	"Society": #65B,
+	"Computers" :#E22, 
+	"Sports" : #435,
+	"Business" : #BB8,
+	"Recreation" :#7BB,
+	"News": #6C4,
+	"Regional" : #C7A,
+	"Reference" : #B46,
+	"Science" : #658,
+	"Shopping" : #500,
+	"Games" : #462,
+	"Health" : #008,
+	"Home" : #C84,
+	"Adult" : #222,
+	"World" : #466,
+	);
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	background:transparent;
+	background-color:none;
+	border:1px transparent solid;
+}
+
+.domainToCopy{
+	border: 1px transparent solid;
+}
+
+
+
+.btn-sm{
+	color: #333;
+	border-radius:0px;
+	border: 0px solid transparent;
+	border-bottom: 3px solid $primary;
+	padding-bottom:0.1em;
+	background-color:#DDD;
+	margin: 1px;
+}
+
+.btn-dropdown {
+	border-color: #A15;
+}
+
+.btn-dropdown:hover{
+	color: #FFF;
+	border-color: #A15;
+	background-color:#A15;
+}
+
+@each $topic, $color in $topics {
+	.badge-#{$topic} {
+		background-color: $color;
+		color:#FFF;
+	}
+}
+
+.table {
+	.name{
+		width:19% !important;
+	}
+	.trustflow{
+		width:5% !important;
+	}
+	.trustmetrics{
+		width:5% !important;
+	}
+	.refip{
+		width:5% !important;
+	}
+	.title{
+		width:17% !important;
+	}
+	.language{
+		width:9% !important;
+	}
+	.ttf{
+		width:16% !important;
+	}
+	.tags{
+		width:9% !important;
+	}
+	.liens{
+		width:5% !important;
+	}
+	.achats{
+		width:5% !important;
+	}
+	.date{
+		width:5% !important;
+	}
+}
+
+
+.main_recherche {
+	display:grid;
+	grid-template-areas: "tags urls";
+}
+
+.main_tags {
+	grid-area:tags;
+	margin: 10px;
+}
+
+.main_urls {
+	grid-area:urls;
+	margin: 10px;
+}
+
+@media (max-width: 600px) {
+    .recherche {
+		grid-template-areas: "tags" "urls";
+	}
+}
