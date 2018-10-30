@@ -24,7 +24,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class CrawlService
 {
     //nb d'url crawl au maximum
-    const MAXCRAWL = 500;
+    const MAXCRAWL = 10;
     //nb d'url crawl en parallèle (augmenter peut provoquer un arrete prématuré)
     const CONCURRENCY = 30;
     
@@ -128,7 +128,7 @@ class CrawlService
      //gestion du crawl, initialisation des urls, tags et dates de recherche
     public function crawlIndex2($searchId)
     {
-       echo "debut";
+       
         $entityManager = $this->em;
         $search = $this->em
                 ->getRepository(Research::class)

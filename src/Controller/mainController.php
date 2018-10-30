@@ -61,7 +61,7 @@ class mainController extends Controller
         $output = new BufferedOutput();
         $application->run($input, $output);
         $content = $output->fetch();*/
-        system('php ../test.php');
+        system('script.bat -h');
         
         return new Response('ok');
     }
@@ -96,7 +96,8 @@ class mainController extends Controller
                 $tag = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $tag);
                 /*******/
 
-                $apiRequest ="https://developer.majestic.com/api/json?app_api_key=61E583B2A74C34A1385044716021D1CC&cmd=SearchByKeyword&query=$tag&scope=0&count=50";
+                $apiRequest ="https://developer.majestic.com/api/json?app_api_key=".getenv('API_MAJESTIC_KEY')."&cmd=SearchByKeyword&query=$tag&scope=0&count=50";
+                echo $apiRequest;
                 $response = file_get_contents($apiRequest);
                 $response = json_decode ($response);
                 

@@ -1,4 +1,5 @@
 #!/usr/bin/php
 <?php
-	exec('php ../bin/console app:crawl 34');
+print_r('debut');
+	system('php ../bin/console app:crawl 39');
 ?>
