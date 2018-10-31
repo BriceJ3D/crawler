@@ -43,7 +43,7 @@ $(document).ready(function() {
         }
     }
   });
-	//copie de textarea des domaines dans le presse papier
+	   //copie de textarea des domaines dans le presse papier
    	$('#clipboard').click(function(){
       $('#textareaToCopy').select();
       document.execCommand('copy');
@@ -55,6 +55,7 @@ $(document).ready(function() {
       $(this).parent().children('.domainToCopy').blur()
     });
 
+    //ajout des villes dans la textarea des tags
    	$('#tags_city').click(function(){
       let keyword = $('#tags_keywords').val().trim();
       if (keyword != ''){
