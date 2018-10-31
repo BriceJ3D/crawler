@@ -26,7 +26,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpKernel\KernelInterface;
-
 use Omines\DataTablesBundle\Adapter\ArrayAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\Controller\DataTablesTrait;
@@ -39,34 +38,8 @@ class mainController extends Controller
     use DataTablesTrait;
 	
     /**
-    * @Route("/tags_search", name="tagsearch")
-    */
-    public function tagsearch(Request $request){
-        $entityManager = $this->getDoctrine()->getManager();
-        
-    }
-
-    /**
-    * @Route("/research_crawl/{id}", name="researchcrawl")
-    */
-    public function researchCrawl(Research $search, KernelInterface $kernel){
-      
-        // on passe par une commande console pour pouvoir utiliser les threads
-        /*$application = new Application($kernel);
-        $application->setAutoExit(false);
-        $input = new ArrayInput(array(
-           'command' => "app:crawl",
-           'id' => $search->getId(),
-        ));
-        $output = new BufferedOutput();
-        $application->run($input, $output);
-        $content = $output->fetch();*/
-        system('script.bat -h');
-        
-        return new Response('ok');
-    }
-    /**
-    * @Route("/index_crawl", name="indexcrawl")
+    * @Route("/", name="indexcrawl")
+    * Page d'accueil, recherche et tags
     */
     public function indexCrawl(Request $request, CrawlService $crawlService, LoggerInterface $logger){
         $recupOK = null;
@@ -97,7 +70,7 @@ class mainController extends Controller
                 /*******/
 
                 $apiRequest ="https://developer.majestic.com/api/json?app_api_key=".getenv('API_MAJESTIC_KEY')."&cmd=SearchByKeyword&query=$tag&scope=0&count=50";
-                echo $apiRequest;
+                
                 $response = file_get_contents($apiRequest);
                 $response = json_decode ($response);
                 
@@ -245,4 +218,25 @@ class mainController extends Controller
             'credits' => $credits,
         ));
    } 
+
+    /**
+    * @Route("/research_crawl/{id}", name="researchcrawl")
+    * Page appellée en ajax permettant le lancement d'une recherche
+    */
+    public function researchCrawl(Research $search, KernelInterface $kernel){
+      
+        // on passe par une commande console pour pouvoir utiliser les threads
+        $application = new Application($kernel);
+        $application->setAutoExit(false);
+        $input = new ArrayInput(array(
+           'command' => "app:crawl",
+           'id' => $search->getId(),
+        ));
+        $output = new BufferedOutput();
+        $application->run($input, $output);
+        $content = $output->fetch();
+        //system('script.bat -h');
+        
+        return new Response('ok');
+    }
 }

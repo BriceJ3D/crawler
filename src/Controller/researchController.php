@@ -16,6 +16,7 @@ class researchController extends Controller
 
     /**
     * @Route("/search", name="search_index")
+    * Affichage de la liste des recherches et de leurs caracteristiques
     */
     public function search_index(){
         $entityManager = $this->getDoctrine()->getManager();
@@ -33,6 +34,7 @@ class researchController extends Controller
 
      /**
     * @Route("/search/{id}", name="search_show")
+    * Affichage d'une recherche et de ses resultats
     */
     public function search_show($id){
         $entityManager = $this->getDoctrine()->getManager();

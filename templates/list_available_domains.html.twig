@@ -35,22 +35,24 @@
         </div>
     </td>
     <td class="p-1"> <!-- liens achat-->
-            <button type="button" class="btn btn-sm btn-dropdown dropdown-toggle" data-toggle="dropdown">
-                Choisir
-            </button>
-            <div class="dropdown-menu">
-                <div class="dropdown-header">Lien direct</div>
-                <a class="dropdown-item"  href="https://www.namebright.com/{{domain.domainName}}" target="blank">NameBright</a>
-                <a class="dropdown-item"  href="https://shop.gandi.net/fr/domain/suggest?search={{domain.domainName}}" target="blank">Gandi</a>
-                <a class="dropdown-item"  href="https://cp.espace2001.com/cart.php?a=add&domain=register&query={{domain.domainName}}" target="blank">E2001</a>
-                <a class="dropdown-item"  href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain.domainName}}" target="blank">NameCheap</a>
-                <a class="dropdown-item"  href="https://fr.godaddy.com/domains/searchresults.aspx?isc=gofhfhfr08&checkAvail=1&tmskey=ad_dlp_com_fr&domainToCheck={{domain.domainName}}" target="blank">GoDaddy</a>
-                <a class="dropdown-item"  href="https://www.ovh.com/fr/order/domain/#/legacy/domain/search?domain={{domain.domainName}}" target="blank">OVH</a>
-                <div class="dropdown-header">Lien global</div>
-                <a class="dropdown-item"  href="https://internetbs.net/fr/enregistrement-domaines/index.html" target="blank">Internet.bs</a>
-                <a class="dropdown-item"  href="https://www.dynadot.com/fr/" target="blank">Dynadot</a>
-            </div>
+        <button type="button" class="btn btn-sm btn-dropdown dropdown-toggle" data-toggle="dropdown">
+            Choisir
+        </button>
+        <div class="dropdown-menu">
+            <div class="dropdown-header">Lien direct</div>
+            <a class="dropdown-item"  href="https://www.namebright.com/{{domain.domainName}}" target="blank">NameBright</a>
+            <a class="dropdown-item"  href="https://shop.gandi.net/fr/domain/suggest?search={{domain.domainName}}" target="blank">Gandi</a>
+            <a class="dropdown-item"  href="https://cp.espace2001.com/cart.php?a=add&domain=register&query={{domain.domainName}}" target="blank">E2001</a>
+            <a class="dropdown-item"  href="https://www.namecheap.com/domains/registration/results.aspx?domain={{domain.domainName}}" target="blank">NameCheap</a>
+            <a class="dropdown-item"  href="https://fr.godaddy.com/domains/searchresults.aspx?isc=gofhfhfr08&checkAvail=1&tmskey=ad_dlp_com_fr&domainToCheck={{domain.domainName}}" target="blank">GoDaddy</a>
+            <a class="dropdown-item"  href="https://www.ovh.com/fr/order/domain/#/legacy/domain/search?domain={{domain.domainName}}" target="blank">OVH</a>
+            <div class="dropdown-header">Lien global</div>
+            <a class="dropdown-item"  href="https://internetbs.net/fr/enregistrement-domaines/index.html" target="blank">Internet.bs</a>
+            <a class="dropdown-item"  href="https://www.dynadot.com/fr/" target="blank">Dynadot</a>
+        </div>
         
     </td>
-    <td class="p-1">{{domain.creationDate|date('d/m/Y H:i:s')}}</td>
+    <td class="p-1">
+        {{domain.creationDate|date('d/m/Y H:i:s')}}
+    </td>
 </tr>

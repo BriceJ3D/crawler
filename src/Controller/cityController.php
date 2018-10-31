@@ -14,9 +14,12 @@ class cityController extends Controller
 {
 	/**
     * @Route("/cities", name="city_index")
+    * page de listing des villes 
     */
     public function banned_index(Request $request){
         $entityManager = $this->getDoctrine()->getManager();
+        
+//formulaire d'ajout d'une ville
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array('label' => 'Ville'))
             ->add('save', SubmitType::class, array('label' => 'Ajouter la ville'))
@@ -37,6 +40,7 @@ class cityController extends Controller
                 $entityManager->flush();
             }            
         }
+
         $cities = $this->getDoctrine()
                 ->getRepository(City::class)
                 ->findBy([], ['name' => 'ASC']);

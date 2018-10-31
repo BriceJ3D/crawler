@@ -23,11 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CrawlService
 {
-    //nb d'url crawl au maximum
-    const MAXCRAWL = 10;
-    //nb d'url crawl en parallèle (augmenter peut provoquer un arrete prématuré)
-    const CONCURRENCY = 30;
-    
+
     private $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -174,10 +170,9 @@ class CrawlService
         $result = Crawler::create()
             ->setCrawlObserver($crawlLogger)
             ->setCrawlProfile(new CrawlAllUrls)
-            ->setMaximumCrawlCount(self::MAXCRAWL)
-            ->setConcurrency(self::CONCURRENCY)
+            ->setMaximumCrawlCount(getenv('MAX_CRAWL'))
+            ->setConcurrency(getenv('CONCURRENCY'))
             ->startCrawling($url->getAddress());
-        //echo 'Total ' . $result['allCount'] . '- Externes' . $result['externalCount'];
         //pour chaque domaine externe on recupere et on set la disponibilité
         foreach($result['externalLinks'] as $domain){
             $domainExist = $this->em
@@ -190,9 +185,7 @@ class CrawlService
             }
 
             $domain->addUrl($url);
-            //$now = new \DateTime(date('Y-m-d H:i:s'));
             // On recupere la disponibilité
-            //echo 'traitement disponibilité : ' . $domain->getDomainName() . '<br>';
             if ($domain->getDispo() == 'available'){
 
                 $request = 'https://developer.majestic.com/api/json?app_api_key='.getenv('API_MAJESTIC_KEY').'&cmd=GetIndexItemInfo&items=1&item0='.$domain->getDomainName().'&datasource=fresh';
@@ -210,7 +203,6 @@ class CrawlService
                 $credits = $this->em
                 ->getRepository(Credits::class)
                 ->findOneById(1);
-                //dump($response->DataTables->Results->Data[0]);
                 $credits->setActual($credits->getActual()-1);
                 $entityManager->persist($credits);
 

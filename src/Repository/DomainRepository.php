@@ -30,10 +30,11 @@ class DomainRepository extends ServiceEntityRepository
         return new Response('Saved new domain with id '.$domain->getId());
     }
 
-     public function findDispoByCritere ($refIp = 0,$tf = 0,$tm = 0): array
+    /**********************/
+    // Recuperation des domaines disponibles en fonction des criteres de la recherche
+    /**********************/
+    public function findDispoByCritere ($refIp = 0,$tf = 0,$tm = 0): array
     {
-        // automatically knows to select Products
-        // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('d')
             ->andWhere('d.RefIP >= :refIp')
             ->andWhere('d.trustMetrics >= :tm')
@@ -47,9 +48,6 @@ class DomainRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $qb->execute();
-
-        // to get just one result:
-        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
     }
 
 //    /**

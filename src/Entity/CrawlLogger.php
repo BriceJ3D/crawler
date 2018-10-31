@@ -11,6 +11,9 @@ use Iodev\Whois\Whois;
 use Psr\Log\LoggerInterface;
 use XML_RPC2_Client;
 
+/************************/
+// Cette classe permet d'utiliser le crawler et implemente les actions a réaliser lors de chaque etape du crawl
+/************************/
 class CrawlLogger extends CrawlObserver
 {
     public $internalCount;
@@ -24,7 +27,6 @@ class CrawlLogger extends CrawlObserver
         $this->internalCount = 0;
         $this->externalCount = 0;
         $this->start = new \DateTime(date('Y-m-d H:i:s'));
-        //$this->log = new LoggerInterface;
     }
 
     /******************/
@@ -95,15 +97,13 @@ class CrawlLogger extends CrawlObserver
         if ($domain != $foundOnUrl){
             if (preg_match('/^((?!-)[-a-z0-9]{1,63}(?<!-)\.)+(?=.{1,63}$)(?!-)([-a-z0-9]*[a-z][-a-z0-9]*\.?)(?<!-)$/', $domain)) {
                 $this->externalCount ++;
-                $domain = new Domain($domain);
-                //echo "externe : " . $url .'<br>';        
+                $domain = new Domain($domain);       
                 
                 $domain->setDispo($statut);
 
                 array_push($this->externalList, $domain);
             }
         } else {
-            //echo "interne : " . $url . '<br>';
             $this->internalCount ++;
         }
     }
@@ -128,7 +128,6 @@ class CrawlLogger extends CrawlObserver
         }
 
         $now = new \DateTime(date('Y-m-d H:i:s'));
-        //$this->log->info($domain->getDomainName() . ' bulk : ' . $now->format('H:i:s'));
         return ($result);
     }
 

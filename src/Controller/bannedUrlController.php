@@ -17,6 +17,8 @@ class bannedUrlController extends Controller
     */
     public function banned_index(Request $request){
         $entityManager = $this->getDoctrine()->getManager();
+       
+//formulaire d'ajout d'url bannie
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array('label' => 'Url'))
             ->add('save', SubmitType::class, array('label' => 'Ajouter l\'url'))

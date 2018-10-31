@@ -19,10 +19,12 @@ class domainController extends Controller
 {
 	/**
     * @Route("/domains", name="domain_index")
+    * Page de listing des domaines
     */
     public function domain_index(Request $request){
         $entityManager = $this->getDoctrine()->getManager();
 
+//formulaire de recherche par critère
         $form = $this->createFormBuilder()
             ->add('TF', NumberType::class, array('label' => 'TF superieur à :',
                                                     'required' => false

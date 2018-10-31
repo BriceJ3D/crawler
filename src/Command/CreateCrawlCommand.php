@@ -7,6 +7,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Service\CrawlService;
 
+/*******/
+/* Commande qui lance le crawl d'une recherche en recuperant l'id
+/********/
+
 class CreateCrawlCommand extends Command
 {
 	private $crawlService;
